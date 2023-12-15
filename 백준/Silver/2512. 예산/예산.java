@@ -6,10 +6,10 @@ import java.util.StringTokenizer;
 public class Main {
 	private static int[] array;
 	
-	private static int binarySearch(int low, int high, int total) {	
+	private static int search(int low, int high, int total) {	
 		while(low<=high) {
-			int mid=(low+high)/2;
-			int sum=0;
+			int mid=(low+high)/2; //상한액
+			int sum=0; //상한액으로 얻을 수 있는 예산
 			
 			for(int i=0;i<array.length;i++) {
 				if(array[i]>mid)
@@ -18,9 +18,9 @@ public class Main {
 					sum+=array[i];
 			}
 			
-			if(sum<=total)
+			if(sum<=total) //예산이 아직 총량에 도달하지 못함
 				low=mid+1;
-			else
+			else //예산 초과
 				high=mid-1;
 		}
 		
@@ -40,7 +40,7 @@ public class Main {
 		}
 		int total=Integer.parseInt(br.readLine()); //총 예산
 		
-		int max=binarySearch(0,high,total);
+		int max=search(0,high,total);
 		System.out.println(max);
 	}
 }
