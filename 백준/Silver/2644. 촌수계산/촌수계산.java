@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 public class Main {
-	private static LinkedList<Integer>list[]; //인접배열
+	private static LinkedList<Integer>list[]; //인접리스트
 	private static boolean visited[];
 	private static int result=-1;
 	private static boolean isFind=false; //두 사람의 촌수 관계를 찾았는지
