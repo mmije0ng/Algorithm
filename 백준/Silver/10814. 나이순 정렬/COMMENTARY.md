@@ -11,29 +11,29 @@
 ```java
 public int compareTo(Student s) {
         if (this.age < s.age) 
-                    return -1;
-                            else if (this.age > s.age) 
-                                        return 1;
-                                                else if (this.age == s.age) 
-                                                            return this.order < s.order ? -1 : 1;
+                return -1;
+        else if (this.age > s.age) 
+                return 1;
+        else if (this.age == s.age) 
+                return this.order < s.order ? -1 : 1;
                                                                     
-                                                                            return 0;
-                                                                            }
-                                                                            ```
+        return 0;
+}
+```
 
-                                                                             처음에는 아래와 같은 코드로 작성했다.
+처음에는 아래와 같은 코드로 작성했다.
 
-                                                                             ```java
-                                                                             if(this.age<s.age)
-                                                                                        return -2;  
-                                                                                        else if(this.age==s.age){
-                                                                                            if(this.order<s.order)
-                                                                                                    return -1;
-                                                                                                        else
-                                                                                                                return 0;
-                                                                                                                }
-                                                                                                                else
-                                                                                                                    return 1;
-                                                                                                                    ```
+```java
+        if(this.age<s.age)
+                return -2;  
+        else if(this.age==s.age){
+                if(this.order<s.order)
+                        return -1;
+                else
+                        return 0;
+        }
+        else
+                return 1;
+```
 
-                                                                                                                    예제의 경우에는 문제가 없었는데 통과되지 못하였다. upheap연산 과정에서 우선순위에서 문제가 생긴 것 같다. 아무래도 compareTo에 대해 잘못 이해하고 있어서 별다른 생각없이 코드를 작성한게 발목을 잡았다.
+예제의 경우에는 문제가 없었는데 통과되지 못하였다. upheap연산 과정에서 우선순위에서 문제가 생긴 것 같다. 아무래도 compareTo에 대해 잘못 이해하고 있어서 별다른 생각없이 코드를 작성한게 발목을 잡았다.
