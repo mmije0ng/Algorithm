@@ -37,7 +37,7 @@ public class Main {
 		Collections.sort(list);
 		
 		for(int i=0;i<size;i++) {
-			if(list.get(i).height>maxHeight) {
+			if(list.get(i).height>=maxHeight) {
 				maxHeight=list.get(i).height;
 				maxIndex=i;
 			}	
@@ -49,8 +49,8 @@ public class Main {
 		
 		//최고 기둥 왼쪽 면적
 		for(int i=0;i<=maxIndex;i++) {
-			//내 기둥 높이가 현재까지 최고 기둥 높이보다 더 높다면
-			if(list.get(i).height>height) {
+			//i번째 기둥 높이가 현재까지 최고 기둥 높이보다 높거나 같다면
+			if(list.get(i).height>=height) {
 				res+=(list.get(i).location-list.get(index).location)*height; //(나보다 높은 기둥 좌표-현재 최고 기둥 좌표)*현재 최고 기둥 높이
 				index=i;
 				height=list.get(i).height; //현재 최고 기둥 높이 변경	
@@ -60,7 +60,6 @@ public class Main {
 		res+=maxHeight; //최고 기둥 높이 면적
 		height=0;
 		index=0;
-		int idx=0;
 		
 		//최고 기둥 오른쪽 면적
 		for(int i=size-1;i>=maxIndex;i--) {
@@ -68,11 +67,8 @@ public class Main {
 				res+=(list.get(index).location-list.get(i).location)*height;
 				height=list.get(i).height; //현재 최고 기둥 높이 변경	
 				index=i;
-				idx=i;
 			}
 		}
-		
-		res+=(list.get(idx).location-list.get(maxIndex).location)*list.get(idx).height;
 		
 		System.out.println(res);
 		
