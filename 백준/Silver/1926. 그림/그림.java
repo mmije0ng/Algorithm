@@ -1,7 +1,20 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
+
+class Node{
+	private int rows, cols;
+	Node(int rows, int cols){
+		this.rows=rows;
+		this.cols=cols;
+	}
+	
+	int getRows() {return rows;}
+	int getCols() {return cols;}
+}
 
 public class Main {
 	private static int[][] graph;
@@ -13,21 +26,32 @@ public class Main {
 	private static int[] dx= {1,0,-1,0};
 	private static int[] dy= {0,1,0,-1};
 	
-	private static void dfs(int rows,int cols) {
+	private static void bfs(int rows,int cols) { //width는 각 그림의 넓이
 		visited[rows][cols]=true;
 		width++;
 		
-		for(int i=0;i<4;i++) {
-			try {
-				if(!visited[rows+dy[i]][cols+dx[i]] && graph[rows+dy[i]][cols+dx[i]]==1) {
-					dfs(rows+dy[i],cols+dx[i]);
-				}		
-			}
+		Queue<Node>queue=new LinkedList<>();
+		queue.add(new Node(rows,cols));
+		while(!queue.isEmpty()) {
+			Node node=queue.remove();
+			rows=node.getRows();
+			cols=node.getCols();
 			
-			catch(ArrayIndexOutOfBoundsException e) {
-				continue;
+			for(int i=0;i<4;i++) {
+				try {
+					if(!visited[rows+dy[i]][cols+dx[i]] && graph[rows+dy[i]][cols+dx[i]]==1) {
+						width++;
+						visited[rows+dy[i]][cols+dx[i]]=true;
+						queue.add(new Node(rows+dy[i],cols+dx[i]));
+					}
+				}
+				
+				catch(ArrayIndexOutOfBoundsException e) {
+					continue;
+				}
 			}
 		}
+		
 	}
 	
 	public static void main(String[] args)throws IOException{
@@ -47,13 +71,13 @@ public class Main {
 		for(int i=0;i<n;i++) {
 			for(int j=0;j<m;j++) {
 				if(!visited[i][j] && graph[i][j]==1) {
-					count++; // dfs가 열릴 때 그림의 개수 count
-					dfs(i,j);
-					max=Math.max(max, width); //최대 넓이와 dfs가 끝난 후 넓이 비교
-					width=0; //넓이 초기화
+					count++;
+					bfs(i,j);
+					max=Math.max(max, width);
+					width=0;
 				}
 			}
-		}
+		}	
 		
 		System.out.println(count);
 		System.out.println(max);
