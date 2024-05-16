@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-    static int[] parent; //부모 노드
+    static int[] parent; //부모 정점 저장
 
     static int find(int curr){
         if(parent[curr]==0)
@@ -53,8 +53,7 @@ public class Main {
         Collections.sort(graph); //오름차순으로 정렬
 
         int graphWeight=0;
-        for(int i=0;i<graph.size();i++){
-            Node node=graph.get(i);
+        for (Node node : graph) {
             int start = node.start;
             int end = node.end;
             int weight = node.weight;
@@ -79,7 +78,7 @@ class Node implements Comparable<Node> {
 
     @Override
     public int compareTo(Node node) {
-        // weights are equal
+        // 오름차순으로 정렬
         return Integer.compare(node.weight, this.weight);
     }
 }
