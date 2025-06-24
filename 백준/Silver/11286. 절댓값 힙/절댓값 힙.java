@@ -9,7 +9,7 @@ class Main {
         PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer n1, Integer n2) {
-                // 절댓값이 같으면 음수를 반환하여 n1이 음수이면 음수, 양수이면 양수 반환
+                // 절댓값이 같으면 n1이 음수이면 음수, 양수이면 양수 반환
                 if (Math.abs(n1) == Math.abs(n2)) {
                     return n1 - n2;
                 }
