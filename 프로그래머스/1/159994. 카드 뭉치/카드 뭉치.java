@@ -1,24 +1,28 @@
 import java.util.*;
 
 class Solution {
-    public String solution(String[] cards1, String[] cards2, String[] goal) {     
-        int card1Index = 0;
-        int card2Index = 0;
-        Queue<String> queue = new ArrayDeque<>();
+    public String solution(String[] cards1, String[] cards2, String[] goal) { 
+        // ArrayDeque를 초기화할 때 생성자에 List를 넘기면 해당 리스트의 데이터들을 순서대로 초깃값으로 하여 ArrayDeque를 생성
+        ArrayDeque<String> cardsDeque1 = new ArrayDeque<>(Arrays.asList(cards1));
+        ArrayDeque<String> cardsDeque2 = new ArrayDeque<>(Arrays.asList(cards2));
+        ArrayDeque<String> goalDeque = new ArrayDeque<>(Arrays.asList(goal));
         
-        for(int i=0; i<goal.length; i++){
-            if(card1Index < cards1.length && cards1[card1Index].equals(goal[i])){
-                queue.add(cards1[card1Index++]);
+        // goal이 비어있을 때 까지 반복
+        while(!goalDeque.isEmpty()){
+            if(!cardsDeque1.isEmpty() && cardsDeque1.peek().equals(goalDeque.peek())){
+                cardsDeque1.poll();
+                goalDeque.poll();
             }
             
-            else if(card2Index < cards2.length && cards2[card2Index].equals(goal[i])){
-                queue.add(cards2[card2Index++]);
+            else if(!cardsDeque2.isEmpty() && cardsDeque2.peek().equals(goalDeque.peek())){
+                cardsDeque2.poll();
+                goalDeque.poll();
             }
             
-            else
-                return "No";
+            else // 완성할 수 없는 경우
+                break;
         }
         
-        return "Yes";
+        return goalDeque.isEmpty() ? "Yes" : "No";
     }
 }
