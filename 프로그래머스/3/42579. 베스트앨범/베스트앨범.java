@@ -5,6 +5,8 @@ class Solution {
     public int[] solution(String[] genres, int[] plays) {
         List<Integer> answer = new ArrayList<>();
         HashMap<String, Integer> genreTotalMap = new HashMap<>(); // <장르, 총 재생 횟수>, {pop=3100, classic=1450}
+
+        
         HashMap<String, ArrayList<Integer>> genreMap = new HashMap<>(); // <장르, 고유번호>, {pop=[4, 1], classic=[3, 0, 2]}
         
         for (int i = 0; i < genres.length; i++) {
