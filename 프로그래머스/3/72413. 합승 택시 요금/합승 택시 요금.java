@@ -5,8 +5,8 @@ class Solution {
     public int solution(int n, int s, int a, int b, int[][] fares) {
         dist = new int[n+1][n+1];
         
-        for(int i = 1; i <= n; ++i){
-            for(int j = 1; j <=n; ++j){
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <=n; j++){
                 if(i==j)
                     dist[i][j] = 0; // a->a로 가는 경우는 비용이 0
                 else
@@ -23,8 +23,8 @@ class Solution {
         }
         
         // 플로이드워셜
-        for(int k = 1; k <= n; ++k){
-            for(int i = 1 ; i <= n; ++i){
+        for(int k = 1; k <= n; k++){
+            for(int i = 1 ; i <= n; i++){
                 for(int j = 1 ; j <= n; ++j){
                     if(dist[i][j] > dist[i][k] + dist[k][j])
                         dist[i][j] = dist[i][k] + dist[k][j];
@@ -36,7 +36,7 @@ class Solution {
         int answer = dist[s][a] + dist[s][b];
         
         // 특정 구간까지 합승해서 갔을 때, 더 싼 경우가 있는지 확인
-        for(int i = 1; i <= n; ++i){
+        for(int i = 1; i <= n; i++){
             answer = Math.min(answer, dist[s][i] + dist[i][a] + dist[i][b]);
         }
         return answer;
