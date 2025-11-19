@@ -1,24 +1,15 @@
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 class Solution {
     public int solution(int[] citations) {
-        List<Integer> list = new ArrayList<>();
-        for(int value: citations)
-            list.add(value);
-        
-        Collections.sort(list); // 오름차순 정렬
-        
-        List<Integer> indexList = new ArrayList<>(); // H-Index 저장
-        
-        for (int i = 0; i < list.size(); i++) {
-            int num = list.get(i);
-            int papers = list.size() - i;   // num 이상 인용된 논문 수
-            int h = Math.min(num, papers);  // H-index 후보
-            indexList.add(h);
-        }
-        
-        Collections.sort(indexList, Collections.reverseOrder()); // 내림차순 정렬
-        
-        return indexList.size() >0 ? indexList.get(0) : 0;
+        List<Integer> list = Arrays.stream(citations)
+                                   .boxed()
+                                   .collect(Collectors.toList());
+
+        // 필요한 로직 추가…
+
+        return 0; // 일단 반환값 맞춰둠
     }
 }
