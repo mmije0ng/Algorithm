@@ -6,18 +6,16 @@ class Solution {
         int iterCnt = 0; // 반복 횟수
         String resultS = s; // 변환할 문자열
         
-        while (!resultS.equals("1")) {
+        while(!resultS.equals("1")){
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < resultS.length(); i++) {
-                // 0이 아니면 이진 변환에 포함
-                if (resultS.charAt(i) != '0') {
-                    sb.append(resultS.charAt(i));
-                } else {
+            int len = 0; // 0 제거 후 길이
+            for(int i=0; i<resultS.length(); i++){
+                if(resultS.charAt(i) == '0')
                     cntZero++;
-                }
+                else
+                    len++;
             }
-            iterCnt++;
-            int len = sb.toString().length(); // 0 제거 후 길이
+            iterCnt++;            
             resultS = Integer.toBinaryString(len); // 이진 변환 결과
         }
 
