@@ -6,12 +6,12 @@ class Solution {
         return answer;
     }
     
-    int fib(int num){
-        if(num <=1)
-            return num;
-        if(data[num] != 0)
-            return data[num]%1234567;
-        
-        return data[num] = (fib(num-2) + fib(num-1)) %1234567;
+    int fib(int n){
+        if(n<=1)
+            return n;
+        else if (data[n]!=0)
+            return data[n]%1234567;
+        else
+            return data[n] = (fib(n-1)+fib(n-2))%1234567;
     }
 }
