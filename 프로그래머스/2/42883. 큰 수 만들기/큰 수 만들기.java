@@ -8,6 +8,7 @@ class Solution {
             char charNumber = number.charAt(i);
             // 스택에 top보다 배열의 숫자가 더 크다면 스택 top 제거
             while(!stack.isEmpty() && k>0 && stack.peek()<charNumber){
+                // System.out.println(stack.peek());
                 stack.pop();
                 k--;
             }
@@ -18,7 +19,7 @@ class Solution {
         // 뒤에 k개 만큼 제거되지 못한 경우 제거
         // ex) 54321
         for(int i=0; i<k; i++){
-            System.out.println(stack.peek());
+            // System.out.println(stack.peek());
             stack.pop();
         }
         
