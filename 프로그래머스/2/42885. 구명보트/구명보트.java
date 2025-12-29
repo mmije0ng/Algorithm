@@ -21,14 +21,13 @@ class Solution {
                 // 둘이 같이 탑승
                 start++;
                 end--;
-                answer++;
             } 
             
-            else {
+            else
                 // 무거운 사람만 단독 탑승
                 end--;
-                answer++;
-            }
+            answer++;
+            
         }
 
         return answer;
