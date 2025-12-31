@@ -6,19 +6,16 @@ class Solution {
             int len = 0;
             // 양끝과 기지국, 기지국과 기지국 사이의 빈 전파 범위 구간을 먼저 구함
             // 첫번째 기지국과 왼쪽 끝 사이 전파가 통하지 않는 길이
-            if(i == 0){
+            if(i == 0)
                 len = stations[i]-w-1;
-            }
             
             // 마지막 기지국과 오른쪽 끝 사이 전파가 통하지 않는 길이
-            else if(i == stations.length){
+            else if(i == stations.length)
                 len = n - stations[i-1] - w;
-            }
             
             // 각 기지국과 기지국 사이 전파가 통하지 않는 길이
-            else{
+            else
                 len = stations[i] - stations[i-1] - (w*2) -1;
-            }
             
             if(len >=0){
                 // 6일때는 2, 5일때는 1
