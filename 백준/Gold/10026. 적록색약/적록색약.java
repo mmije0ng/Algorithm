@@ -8,7 +8,6 @@ public class Main {
     public static int N = 0;
     public static char[][] arr;
     public static boolean[][] visited;
-    public static int sCnt = 0;
 
     public static int[] dx = {1, -1, 0, 0};
     public static int[] dy = {0, 0, 1, -1};
@@ -34,18 +33,19 @@ public class Main {
                 if (!visited[i][j]) {
                     visited[i][j] = true;
                     cnt++;
-                    dfs(i, j, arr[i][j]);
+                    dfs(i, j, arr[i][j], false);
                 }
             }
         }
 
+        int sCnt = 0;
         visited = new boolean[N][N];
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (!visited[i][j]) {
                     visited[i][j] = true;
                     sCnt++;
-                    dfsS(i, j, arr[i][j]);
+                    dfs(i, j, arr[i][j], true);
                 }
             }
         }
@@ -58,7 +58,7 @@ public class Main {
         br.close();
     }
 
-    public static void dfs(int x, int y, char c) {
+    public static void dfs(int x, int y, char c, boolean isColor) {
         if (x >= N || y >= N)
             return;
         
@@ -69,41 +69,30 @@ public class Main {
             if (isRange(nx, ny) && !visited[nx][ny]) {
                 char nc = arr[nx][ny];
 
-                if (c == 'R' && nc == 'R') {
-                    visited[nx][ny] = true;
-                    dfs(nx, ny, nc);
+                if (isColor) { // 색약일경우
+                    if ((c == 'R' && nc == 'G') || (c == 'G' && nc == 'R') ||
+                        (c == 'G' && nc == 'G') || (c == 'R' && nc == 'R')) {
+                        visited[nx][ny] = true;
+                        dfs(nx, ny, nc, isColor);
+                    } 
+                    else if (c == 'B' && nc == 'B') {
+                        visited[nx][ny] = true;
+                        dfs(nx, ny, nc, isColor);
+                    }
                 } 
-                else if (c == 'G' && nc == 'G') {
-                    visited[nx][ny] = true;
-                    dfs(nx, ny, nc);
-                } 
-                else if (c == 'B' && nc == 'B') {
-                    visited[nx][ny] = true;
-                    dfs(nx, ny, nc);
-                }
-            }
-        }
-    }
-
-    public static void dfsS(int x, int y, char c) {
-        if (x >= N || y >= N)
-            return;
-        
-        for (int i = 0; i < 4; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-            
-            if (isRange(nx, ny) && !visited[nx][ny]) {
-                char nc = arr[nx][ny];
-
-                if ((c == 'R' && nc == 'G') || (c == 'G' && nc == 'R') ||
-                    (c == 'G' && nc == 'G') || (c == 'R' && nc == 'R')) {
-                    visited[nx][ny] = true;
-                    dfsS(nx, ny, nc);
-                } 
-                else if (c == 'B' && nc == 'B') {
-                    visited[nx][ny] = true;
-                    dfsS(nx, ny, nc);
+                else {
+                    if (c == 'R' && nc == 'R') {
+                        visited[nx][ny] = true;
+                        dfs(nx, ny, nc, isColor);
+                    } 
+                    else if (c == 'G' && nc == 'G') {
+                        visited[nx][ny] = true;
+                        dfs(nx, ny, nc, isColor);
+                    } 
+                    else if (c == 'B' && nc == 'B') {
+                        visited[nx][ny] = true;
+                        dfs(nx, ny, nc, isColor);
+                    }
                 }
             }
         }
